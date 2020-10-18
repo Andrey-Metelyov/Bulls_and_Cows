@@ -1,28 +1,44 @@
 package bullscows;
 
+import java.security.InvalidParameterException;
 import java.util.Random;
 
 public class BullsAndCowsGame {
     private String code;
 //    private int turns = 0;
 
-    static BullsAndCowsGame init() {
-        return new BullsAndCowsGame();
+    static BullsAndCowsGame init(int codeLength) {
+        if (codeLength > 10) {
+            System.out.println("Error: can't generate a secret number with a length of 11 because there aren't enough unique digits.");
+//            throw new InvalidParameterException();
+            return null;
+        }
+        return new BullsAndCowsGame(codeLength);
     }
 
-    private BullsAndCowsGame() {
-        code = "9305";
-//        code = prepareCode();
+    private BullsAndCowsGame(int codeLength) {
+//        code = "9305";
+        code = prepareCode(codeLength);
+        System.out.println("The random secret number is " + code + ".");
 //        System.out.println("The secret code is prepared: ****." + code);
     }
 
-    private String prepareCode() {
+    private String prepareCode(int codeLength) {
         Random random = new Random();
-        int number;
+        long number;
+        String code = "";
         do {
-            number = random.nextInt() % 10000;
-        } while (number < 999);
-        String code = String.valueOf(number);
+            number = random.nextLong();
+//            System.out.println(number);
+            while (number > 0 && code.length() < codeLength) {
+                String digit = String.valueOf((int) (number % 10));
+                if (!code.contains(digit)) {
+                    code += digit;
+                }
+                number /= 10;
+            }
+        } while (code.length() < codeLength);
+//        String code = String.valueOf(number);
         return code;
     }
 

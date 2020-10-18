@@ -1,23 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="BullsCowsTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2020-10-18T15:46:38" hostname="DESKTOP-CJ0GNA8" time="0.094">
+<testsuite name="BullsCowsTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2020-10-18T16:02:48" hostname="DESKTOP-CJ0GNA8" time="0.099">
   <properties/>
-  <testcase name="start" classname="BullsCowsTest" time="0.094"/>
+  <testcase name="start" classname="BullsCowsTest" time="0.099"/>
   <system-out><![CDATA[?[1;31m
 Start test 1?[0m
-> 3601
-Grade: 1 bull(s) and 1 cow(s). The secret code is 9305.
-Why 9305? Make your own secret number :)
+> 4
+The random secret number is 8925.
 ?[1;31m
 Start test 2?[0m
-> 9305
-Grade: 4 bull(s). The secret code is 9305.
-Congrats! The secret code is 9305.
-Why 9305? Make your own secret number :)
+> 1
+The random secret number is 6.
 ?[1;31m
 Start test 3?[0m
-> 1246
-Grade: None. The secret code is 9305.
-Why 9305? Make your own secret number :)
+> 11
+Error: can't generate a secret number with a length of 11 because there aren't enough unique digits.
+?[1;31m
+Start test 4?[0m
+> 6
+The random secret number is 589371.
+?[1;31m
+Start test 5?[0m
+> 3
+The random secret number is 564.
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
