@@ -11,9 +11,9 @@ public class BullsAndCowsGame {
     }
 
     private BullsAndCowsGame() {
-        code = "9876";
+        code = "9305";
 //        code = prepareCode();
-        System.out.println("The secret code is prepared: ****." + code);
+//        System.out.println("The secret code is prepared: ****." + code);
     }
 
     private String prepareCode() {
@@ -29,12 +29,12 @@ public class BullsAndCowsGame {
     public boolean successGuess(String guessNumber) {
 //        System.out.println("Turn " + turns++ + 1 + " Answer:");
 //        System.out.println(guessNumber);
-        System.out.println("Grade: " + getGrade(guessNumber) + ".");
+        System.out.println("Grade: " + getGrade(guessNumber) + ". The secret code is " + code + ".");
         if (guessNumber.equals(code)) {
             System.out.println("Congrats! The secret code is " + code + ".");
             return true;
         }
-        return false;
+        return true;
     }
 
     private String getGrade(String guessNumber) {
@@ -51,21 +51,30 @@ public class BullsAndCowsGame {
             return "None";
         }
         String result = "";
-        if (bulls > 1) {
-            result = bulls + " bulls";
-        } else if (bulls == 1) {
-            result = bulls + " bull";
+        if (bulls > 0) {
+            result = bulls + " bull(s)";
         }
         if (cows > 0) {
             if (bulls > 0) {
                 result += " and ";
             }
-            if (cows > 1) {
-                result += cows + " cows";
-            } else if (cows == 1) {
-                result += cows + " cow";
-            }
+            result += cows + " cow(s)";
         }
+//        if (bulls > 1) {
+//            result = bulls + " bulls";
+//        } else if (bulls == 1) {
+//            result = bulls + " bull";
+//        }
+//        if (cows > 0) {
+//            if (bulls > 0) {
+//                result += " and ";
+//            }
+//            if (cows > 1) {
+//                result += cows + " cows";
+//            } else if (cows == 1) {
+//                result += cows + " cow";
+//            }
+//        }
         return result;
     }
 }
