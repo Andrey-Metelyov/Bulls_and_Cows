@@ -6,8 +6,11 @@ public class Main {
     public static void main(String[] args) {
 //        System.out.println("Hello World!");
         Scanner scanner = new Scanner(System.in);
+        System.out.println("Input the length of the secret code:");
         int codeLength = scanner.nextInt();
-        BullsAndCowsGame game = BullsAndCowsGame.init(codeLength);
+        System.out.println("Input the number of possible symbols in the code:");
+        int possibleSymbols = scanner.nextInt();
+        BullsAndCowsGame game = BullsAndCowsGame.init(codeLength, possibleSymbols);
         System.out.println("Okay, let's start a game!");
         String guessNumber;
         int turn = 1;

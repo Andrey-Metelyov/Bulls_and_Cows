@@ -5,40 +5,40 @@ import java.util.Random;
 
 public class BullsAndCowsGame {
     private String code;
-//    private int turns = 0;
 
-    static BullsAndCowsGame init(int codeLength) {
-        if (codeLength > 10) {
-            System.out.println("Error: can't generate a secret number with a length of 11 because there aren't enough unique digits.");
-//            throw new InvalidParameterException();
+    static BullsAndCowsGame init(int codeLength, int possibleSymbols) {
+        if (codeLength > possibleSymbols) {
+            System.out.println("Error: can't generate a secret number with a length of " + codeLength + " because there aren't enough unique symbols.");
             return null;
         }
-        return new BullsAndCowsGame(codeLength);
+        return new BullsAndCowsGame(codeLength, possibleSymbols);
     }
 
-    private BullsAndCowsGame(int codeLength) {
+    private BullsAndCowsGame(int codeLength, int possibleSymbols) {
 //        code = "9305";
-        code = prepareCode(codeLength);
-        System.out.println("The random secret number is " + code + ".");
+        code = prepareCode(codeLength, possibleSymbols);
+        StringBuilder wildcard = new StringBuilder();
+        for (int i = 0; i < codeLength; i++) {
+            wildcard.append('*');
+        }
+        String range = (possibleSymbols <= 10 ? "0-" + (char) ('0' + possibleSymbols - 1) : "0-9, a-" + (char) ('a' + possibleSymbols - 11));
+        System.out.println("The secret is prepared: " + wildcard + " (" + range + ") " + code + ".");
 //        System.out.println("The secret code is prepared: ****." + code);
     }
 
-    private String prepareCode(int codeLength) {
+    private String prepareCode(int codeLength, int possibleSymbols) {
         Random random = new Random();
-        long number;
+        int number;
         String code = "";
         do {
-            number = random.nextLong();
-//            System.out.println(number);
-            while (number > 0 && code.length() < codeLength) {
-                String digit = String.valueOf((int) (number % 10));
-                if (!code.contains(digit)) {
-                    code += digit;
-                }
-                number /= 10;
+            number = random.nextInt(possibleSymbols);
+//            System.out.println("number = " + number);
+            String symbol = String.valueOf(number < 10 ? (char) (number + '0') : (char) (number - 11 + 'a'));
+//            System.out.println("symbol = " + symbol);
+            if (!code.contains(symbol)) {
+                code += symbol;
             }
         } while (code.length() < codeLength);
-//        String code = String.valueOf(number);
         return code;
     }
 
