@@ -45,12 +45,13 @@ public class BullsAndCowsGame {
     public boolean successGuess(String guessNumber) {
 //        System.out.println("Turn " + turns++ + 1 + " Answer:");
 //        System.out.println(guessNumber);
-        System.out.println("Grade: " + getGrade(guessNumber) + ". The secret code is " + code + ".");
+//        System.out.println("Grade: " + getGrade(guessNumber) + ". The secret code is " + code + ".");
+        System.out.println("Grade: " + getGrade(guessNumber));
         if (guessNumber.equals(code)) {
             System.out.println("Congrats! The secret code is " + code + ".");
             return true;
         }
-        return true;
+        return false;
     }
 
     private String getGrade(String guessNumber) {

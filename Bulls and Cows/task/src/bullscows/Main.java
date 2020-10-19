@@ -8,16 +8,17 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         int codeLength = scanner.nextInt();
         BullsAndCowsGame game = BullsAndCowsGame.init(codeLength);
-//        String guessNumber;
-//        int turn = 1;
+        System.out.println("Okay, let's start a game!");
+        String guessNumber;
+        int turn = 1;
 //        String[] answers = {"1234", "9876"};
-//        do {
-////            System.out.println();
-////            System.out.println("Turn " + turn + ". Answer:");
-//            guessNumber = scanner.nextLine();
-////            guessNumber = answers[turn - 1];
-////            System.out.println(guessNumber);
-//            turn++;
-//        } while (!game.successGuess(guessNumber));
+        do {
+//            System.out.println();
+            System.out.println("Turn " + turn + ":");
+            guessNumber = scanner.next();
+//            guessNumber = answers[turn - 1];
+//            System.out.println(guessNumber);
+            turn++;
+        } while (!game.successGuess(guessNumber));
     }
 }
