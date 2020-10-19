@@ -407,6 +407,111 @@ files:
         }
     }
   learner_created: false
+- name: src/bullscows/BullsAndCowsGame.java
+  visible: true
+  text: |
+    package bullscows;
+
+    import java.security.InvalidParameterException;
+    import java.util.Random;
+
+    public class BullsAndCowsGame {
+        private String code;
+
+        static BullsAndCowsGame init(int codeLength, int possibleSymbols) {
+            if (codeLength > possibleSymbols) {
+                System.out.println("Error: can't generate a secret number with a length of " + codeLength + " because there aren't enough unique symbols.");
+                return null;
+            }
+            return new BullsAndCowsGame(codeLength, possibleSymbols);
+        }
+
+        private BullsAndCowsGame(int codeLength, int possibleSymbols) {
+    //        code = "9305";
+            code = prepareCode(codeLength, possibleSymbols);
+            StringBuilder wildcard = new StringBuilder();
+            for (int i = 0; i < codeLength; i++) {
+                wildcard.append('*');
+            }
+            String range = (possibleSymbols <= 10 ? "0-" + (char) ('0' + possibleSymbols - 1) : "0-9, a-" + (char) ('a' + possibleSymbols - 11));
+            System.out.println("The secret is prepared: " + wildcard + " (" + range + ") " + code + ".");
+    //        System.out.println("The secret code is prepared: ****." + code);
+        }
+
+        private String prepareCode(int codeLength, int possibleSymbols) {
+            Random random = new Random();
+            int number;
+            String code = "";
+            do {
+                number = random.nextInt(possibleSymbols);
+    //            System.out.println("number = " + number);
+                String symbol = String.valueOf(number < 10 ? (char) (number + '0') : (char) (number - 11 + 'a'));
+    //            System.out.println("symbol = " + symbol);
+                if (!code.contains(symbol)) {
+                    code += symbol;
+                }
+            } while (code.length() < codeLength);
+            return code;
+        }
+
+        public boolean successGuess(String guessNumber) {
+    //        System.out.println("Turn " + turns++ + 1 + " Answer:");
+    //        System.out.println(guessNumber);
+    //        System.out.println("Grade: " + getGrade(guessNumber) + ". The secret code is " + code + ".");
+            System.out.println("Grade: " + getGrade(guessNumber));
+            if (guessNumber.equals(code)) {
+                System.out.println("Congrats! The secret code is " + code + ".");
+                return true;
+            }
+            return false;
+        }
+
+        private String getGrade(String guessNumber) {
+            int bulls = 0;
+            int cows = 0;
+            for (int i = 0; i < code.length(); i++) {
+                if (code.charAt(i) == guessNumber.charAt(i)) {
+                    bulls++;
+                } else if (code.contains(guessNumber.substring(i, i + 1))) {
+                    cows++;
+                }
+            }
+            if (bulls == 0 && cows == 0) {
+                return "None";
+            }
+            String result = "";
+            if (bulls > 0) {
+                result = bulls + " bull(s)";
+            }
+            if (cows > 0) {
+                if (bulls > 0) {
+                    result += " and ";
+                }
+                result += cows + " cow(s)";
+            }
+    //        if (bulls > 1) {
+    //            result = bulls + " bulls";
+    //        } else if (bulls == 1) {
+    //            result = bulls + " bull";
+    //        }
+    //        if (cows > 0) {
+    //            if (bulls > 0) {
+    //                result += " and ";
+    //            }
+    //            if (cows > 1) {
+    //                result += cows + " cows";
+    //            } else if (cows == 1) {
+    //                result += cows + " cow";
+    //            }
+    //        }
+            return result;
+        }
+    }
+  learner_created: true
 feedback_link: https://hyperskill.org/projects/53/stages/293/implement
-status: Unchecked
+status: Solved
+feedback:
+  message: Congratulations! Continue on <a href="https://hyperskill.org/projects/53/stages/293/implement">JetBrains
+    Academy</a>
+  time: Mon, 19 Oct 2020 03:13:32 UTC
 record: -1

@@ -7,8 +7,16 @@ public class BullsAndCowsGame {
     private String code;
 
     static BullsAndCowsGame init(int codeLength, int possibleSymbols) {
+        if (codeLength <= 0) {
+            System.out.println("Error: code length must be greater than 0.");
+            return null;
+        }
+        if (possibleSymbols > 36) {
+            System.out.println("Error: maximum number of possible symbols in the code is 36 (0-9, a-z).");
+            return null;
+        }
         if (codeLength > possibleSymbols) {
-            System.out.println("Error: can't generate a secret number with a length of " + codeLength + " because there aren't enough unique symbols.");
+            System.out.println("Error: it's not possible to generate a code with a length of " + codeLength + " with " + possibleSymbols + " unique symbols.");
             return null;
         }
         return new BullsAndCowsGame(codeLength, possibleSymbols);
@@ -33,7 +41,7 @@ public class BullsAndCowsGame {
         do {
             number = random.nextInt(possibleSymbols);
 //            System.out.println("number = " + number);
-            String symbol = String.valueOf(number < 10 ? (char) (number + '0') : (char) (number - 11 + 'a'));
+            String symbol = String.valueOf(number < 10 ? (char) (number + '0') : (char) (number - 10 + 'a'));
 //            System.out.println("symbol = " + symbol);
             if (!code.contains(symbol)) {
                 code += symbol;
